@@ -9,7 +9,6 @@ Linux:
           resources: ["*"]
           measurement:
             - name: cpu_usage_idle
-              rename: CPU_USAGE_IDLE
               unit: Percent
             - name: cpu_usage_nice
               unit: Percent
@@ -61,7 +60,7 @@ Windows:
       Processor:
         measurement:
           - name: "% Idle Time"
-            rename: "CPU_IDLE"
+            rename: "cpu_idle"
             unit: "Percent"
           - "% Interrupt Time"
           - "% User Time"
@@ -75,7 +74,7 @@ Windows:
           - name: "% Idle Time"
             unit: "Percent"
           - name: "% Disk Read Time"
-            rename: "DISK_READ"
+            rename: "disk_read"
           - "% Disk Write Time"
         resources: ["*"]
       Memory:
