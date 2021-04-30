@@ -15,6 +15,7 @@ Debian:
 
 Windows:
   package_name: Amazon CloudWatch Agent
+  service_name: AmazonCloudWatchAgent
   pkg_ext: msi
 
 OSX:
