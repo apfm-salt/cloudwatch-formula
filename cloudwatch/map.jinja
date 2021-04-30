@@ -28,4 +28,4 @@
 {% do pkg_path.append(arch.lower()) %}
 {% do pkg_path.append('latest') %}
 {% do pkg_path.append('amazon-cloudwatch-agent.' ~ cloudwatch_settings.pkg_ext) %}
-{% do cloudwatch_settings.update({'package_url': '/'.join(pkg_path)}) %}
+{% do cloudwatch_settings.update({'package_url': pkg_path|join('/')}) %}
