@@ -2,3 +2,8 @@ cloudwatch:
   package_name: amazon-cloudwatch-agent
   service_name: amazon-cloudwatch-agent
   base_url: https://s3.amazonaws.com/amazoncloudwatch-agent
+  config:
+    agents:
+    metrics:
+    logs:
+      log_stream_name: unknown

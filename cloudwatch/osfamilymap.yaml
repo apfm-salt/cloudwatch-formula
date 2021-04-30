@@ -4,6 +4,14 @@ RedHat:
 Debian:
   pkg_ext: deb
   url: https://s3.amazonaws.com/amazoncloudwatch-agent/{{ grains.os|lower }}/amd64/latest/amazon-cloudwatch-agent.deb
+  config:
+    logs:
+      logs_collected:
+        files:
+          collect_list:
+            - log_stream_name: Packages
+              log_group_name: syslog
+              file_path: /var/log/dpkg.log
 
 Windows:
   pkg_ext: msi
