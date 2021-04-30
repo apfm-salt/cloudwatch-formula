@@ -6,4 +6,4 @@ cloudwatch:
     agents:
     metrics:
     logs:
-      log_stream_name: unknown
+      log_stream_name: unknown/{{ grains.id }}

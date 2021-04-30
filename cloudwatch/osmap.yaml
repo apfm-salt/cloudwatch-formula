@@ -1,3 +1,5 @@
+# https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html
+
 Linux:
   config_file: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
   config:
@@ -39,16 +41,16 @@ Linux:
       logs_collected:
         files:
           collect_list:
-            - log_stream_name: system
+            - log_stream_name: system/{{ grains.id }}
               log_group_name: syslog
               file_path: /var/log/syslog
-            - log_stream_name: kernel
+            - log_stream_name: kernel/{{ grains.id }}
               log_group_name: syslog
               file_path: /var/log/kern.log
-            - log_stream_name: auth
+            - log_stream_name: auth/{{ grains.id }}
               log_group_name: syslog
               file_path: /var/log/auth.log
-            - log_stream_name: minion
+            - log_stream_name: minion/{{ grains.id }}
               log_group_name: salt
               file_path: /var/log/salt/minion
 
@@ -110,5 +112,5 @@ Windows:
               event_levels:
                 - INFORMATION
                 - ERROR
-              log_group_name: System
+              log_group_name: System/{{ grains.id }}
               log_stream_name: System
