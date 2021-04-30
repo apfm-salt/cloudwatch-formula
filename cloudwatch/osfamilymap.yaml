@@ -14,6 +14,7 @@ Debian:
               file_path: /var/log/dpkg.log
 
 Windows:
+  package_name: Amazon CloudWatch Agent
   pkg_ext: msi
 
 OSX:
