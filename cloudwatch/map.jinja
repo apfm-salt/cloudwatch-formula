@@ -10,8 +10,8 @@
 {% do salt['defaults.merge'](defaults['cloudwatch'], osfamilymap) %}
 
 {# merge the osmap #}
-{% set osmap = salt['grains.filter_by'](osmap, grain='os') or {} %}
-{% do salt['defaults.merge'](defaults['cloudwatch'], osmap) %}
+{# {% set osmap = salt['grains.filter_by'](osmap, grain='os') or {} %}
+{% do salt['defaults.merge'](defaults['cloudwatch'], osmap) %} {# #}
 
 {% set cloudwatch_settings = salt['pillar.get']('cloudwatch', defaults['cloudwatch'], merge=True) %}
 
