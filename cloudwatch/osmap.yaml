@@ -54,7 +54,7 @@ Linux:
               file_path: /var/log/salt/minion
 
 Windows:
-  config_file: $Env:ProgramData\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent.json
+  config_file: '\ProgramData\Amazon\AmazonCloudWatchAgent\amazon-cloudwatch-agent.json'
   config:
     metrics:
       Processor:
