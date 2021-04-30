@@ -1,0 +1,12 @@
+RedHat:
+  pkg_ext: rpm
+
+Debian:
+  pkg_ext: deb
+  url: https://s3.amazonaws.com/amazoncloudwatch-agent/{{ grains.os|lower }}/amd64/latest/amazon-cloudwatch-agent.deb
+
+Windows:
+  pkg_ext: msi
+
+OSX:
+  pkg_ext: pkg

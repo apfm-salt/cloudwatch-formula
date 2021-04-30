@@ -1,0 +1,4 @@
+cloudwatch:
+  package_name: cloudwatch
+  service_name: cloudwatch
+  base_url: https://s3.amazonaws.com/amazoncloudwatch-agent

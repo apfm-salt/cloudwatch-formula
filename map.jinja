@@ -1,0 +1,31 @@
+# -*- coding: utf-8 -*-
+# vim: ft=yaml
+---
+{% import_yaml 'cloudwatch/defaults.yaml' as defaults %}
+{% import_yaml 'cloudwatch/osfamilymap.yaml' as osfamilymap %}
+{% import_yaml 'cloudwatch/osmap.yaml' as osmap %}
+
+{# merge the osfamilymap #}
+{% set osfamilymap = salt['grains.filter_by'](osfamilymap, grain='os_family') or {} %}
+{% do salt['defaults.merge'](defaults['cloudwatch'], osfamilymap) %}
+
+{# merge the osmap #}
+{% set osmap = salt['grains.filter_by'](osmap, grain='os') or {} %}
+{% do salt['defaults.merge'](defaults['cloudwatch'], osmap) %}
+
+{% set cloudwatch_settings = salt['pillar.get']('cloudwatch', defaults['cloudwatch'], merge=True) %}
+
+{% if grains.cpuarch|lower in ['amd64', 'x86_64'] %}
+  {% set arch = 'amd64' %}
+{% elif grains.cpuarch|lower in ['aarch64', 'arm64'] %}
+  {% set arch = 'amd64' %}
+{% endif %}
+
+{# Construct our agent_url #}
+{# ref: https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os }}/{{ arch }}/latest/amazon-cloudwatch-agent.{{ pkg_ext }} #}
+{% set pkg_path = [cloudwatch_settings.base_url] %}
+{% do pkg_path.append(grains.os.lower()) %}
+{% do pkg_path.append(arch.lower()) %}
+{% do pkg_path.append('latest') %}
+{% do pkg_path.append('amazon-cloudwatch-agent.' ~ {{ cloudwatch_settings.pkg_ext }}) %}
+{% do cloudwatch_settings.update({'package_url': '/'.join(pkg_path)}) %}
