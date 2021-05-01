@@ -18,7 +18,7 @@
 {% if grains.cpuarch|lower in ['amd64', 'x86_64'] %}
   {% set arch = 'amd64' %}
 {% elif grains.cpuarch|lower in ['aarch64', 'arm64'] %}
-  {% set arch = 'amd64' %}
+  {% set arch = 'arm64' %}
 {% endif %}
 
 {# Construct our agent_url #}
