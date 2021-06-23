@@ -15,6 +15,13 @@
 
 {% set cloudwatch_settings = salt['pillar.get']('cloudwatch', defaults['cloudwatch'], merge=True) %}
 
+{% if grains.os == 'Amazon' %}
+  {% set os = 'amazon_linux' %}
+{# this doesn't catch Oracle Linux which resolves to `oracle_linux` but we do not use it, so I care not. #}
+{% else %}
+  {% set os = grains.os|lower %}
+{% endif %}
+
 {% if grains.cpuarch|lower in ['amd64', 'x86_64'] %}
   {% set arch = 'amd64' %}
 {% elif grains.cpuarch|lower in ['aarch64', 'arm64'] %}
@@ -24,7 +31,7 @@
 {# Construct our agent_url #}
 {# ref: https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os }}/{{ arch }}/latest/amazon-cloudwatch-agent.{{ pkg_ext }} #}
 {% set pkg_path = [cloudwatch_settings.base_url] %}
-{% do pkg_path.append(grains.os.lower()) %}
+{% do pkg_path.append(os.lower()) %}
 {% do pkg_path.append(arch.lower()) %}
 {% do pkg_path.append('latest') %}
 {% do pkg_path.append('amazon-cloudwatch-agent.' ~ cloudwatch_settings.pkg_ext) %}
