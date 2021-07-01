@@ -16,16 +16,15 @@
 {% set cloudwatch_settings = salt['pillar.get']('cloudwatch', defaults['cloudwatch'], merge=True) %}
 
 {% if grains.os == 'Amazon' %}
-  {% set os = 'amazon_linux' %}
-{# this doesn't catch Oracle Linux which resolves to `oracle_linux` but we do not use it, so I care not. #}
+    {% set os = 'amazon_linux' %}
 {% else %}
-  {% set os = grains.os|lower %}
+    {% set os = grains.os|lower %}
 {% endif %}
 
 {% if grains.cpuarch|lower in ['amd64', 'x86_64'] %}
-  {% set arch = 'amd64' %}
+    {% set arch = 'amd64' %}
 {% elif grains.cpuarch|lower in ['aarch64', 'arm64'] %}
-  {% set arch = 'arm64' %}
+    {% set arch = 'arm64' %}
 {% endif %}
 
 {# Construct our agent_url #}
