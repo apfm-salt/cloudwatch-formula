@@ -1,16 +1,14 @@
 RedHat:
   pkg_ext: rpm
 
+Amazon:
+  pkg_ext: rpm
+
+CentOS:
+  pkg_ext: rpm
+
 Debian:
   pkg_ext: deb
-  config:
-    logs:
-      logs_collected:
-        files:
-          collect_list:
-            - log_stream_name: Packages
-              log_group_name: syslog
-              file_path: /var/log/dpkg.log
 
 Windows:
   package_name: Amazon CloudWatch Agent
