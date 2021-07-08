@@ -1,6 +1,12 @@
 RedHat:
   pkg_ext: rpm
 
+Amazon:
+  pkg_ext: rpm
+
+CentOS:
+  pkg_ext: rpm
+
 Debian:
   pkg_ext: deb
 
