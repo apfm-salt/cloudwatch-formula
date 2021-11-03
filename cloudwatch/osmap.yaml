@@ -13,7 +13,7 @@ Linux:
             - name: cpu_usage_nice
               unit: Percent
           totalcpu: false
-          metrics_collection_interval: 10
+          metrics_collection_interval: 60
         netstat:
           measurement:
             - tcp_established
@@ -30,12 +30,12 @@ Linux:
             - running
             - sleeping
             - dead
+        mem:
+          resources: ["*"]
+          measurement:
+            - "used_percent"
       append_dimensions:
-        ImageId: "${aws:ImageId}"
         InstanceId: "${aws:InstanceId}"
-        InstanceType: "${aws:InstanceType}"
-        AutoScalingGroupName: "${aws:AutoScalingGroupName}"
-      aggregation_dimensions: [["ImageId"], ["InstanceId", "InstanceType"], []]
     logs:
       logs_collected:
         files:
@@ -67,9 +67,6 @@ Windows:
             - "% User Time"
             - "% Processor Time"
           resources: ["*"]
-          append_dimensions:
-            d1: win_foo
-            d2: win_bar
         LogicalDisk:
           measurement:
             - name: "% Idle Time"
@@ -77,16 +74,18 @@ Windows:
             - name: "% Disk Read Time"
               rename: "disk_read"
             - "% Disk Write Time"
+            - "% Free Space"
           resources: ["*"]
         Memory:
-          metrics_collection_interval: 5
+          metrics_collection_interval: 60
           measurement:
             - "Available Bytes"
             - "Cache Faults/sec"
             - "Page Faults/sec"
             - "Pages/sec"
+            - "% Committed Bytes in Use"
         Network Interface:
-          metrics_collection_interval: 5
+          metrics_collection_interval: 60
           measurement:
             - "Bytes Received/sec"
             - "Bytes Sent/sec"
@@ -99,11 +98,7 @@ Windows:
             - "System Calls/sec"
             - "Processor Queue Length"
       append_dimensions:
-        ImageId: "${aws:ImageId}"
         InstanceId: "${aws:InstanceId}"
-        InstanceType: "${aws:InstanceType}"
-        AutoScalingGroupName: "${aws:AutoScalingGroupName}"
-      aggregation_dimensions: [["ImageId"], ["InstanceId", "InstanceType"], []]
     logs:
       logs_collected:
         windows_events:
