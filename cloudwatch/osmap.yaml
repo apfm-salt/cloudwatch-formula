@@ -83,7 +83,7 @@ Windows:
             - "Cache Faults/sec"
             - "Page Faults/sec"
             - "Pages/sec"
-            - "% Committed Bytes in Use"
+            - "mem_used_percent"
         Network Interface:
           metrics_collection_interval: 60
           measurement:
