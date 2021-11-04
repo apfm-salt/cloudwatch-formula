@@ -59,44 +59,21 @@ Windows:
     metrics:
       metrics_collected:
         Processor:
+          metrics_collection_interval: 60
           measurement:
-            - name: "% Idle Time"
-              rename: "cpu_idle"
-              unit: "Percent"
+            - "% Idle Time"
             - "% Interrupt Time"
             - "% User Time"
-            - "% Processor Time"
-          resources: ["*"]
+          resources: ["_Total"]
         LogicalDisk:
+          metrics_collection_interval: 60
           measurement:
-            - name: "% Idle Time"
-              unit: "Percent"
-            - name: "% Disk Read Time"
-              rename: "disk_read"
-            - "% Disk Write Time"
             - "% Free Space"
           resources: ["*"]
         Memory:
           metrics_collection_interval: 60
           measurement:
-            - "Available Bytes"
-            - "Cache Faults/sec"
-            - "Page Faults/sec"
-            - "Pages/sec"
-            - "mem_used_percent"
-        Network Interface:
-          metrics_collection_interval: 60
-          measurement:
-            - "Bytes Received/sec"
-            - "Bytes Sent/sec"
-            - "Packets Received/sec"
-            - "Packets Sent/sec"
-          resources: ["*"]
-        System:
-          measurement:
-            - "Context Switches/sec"
-            - "System Calls/sec"
-            - "Processor Queue Length"
+            - "% Committed Bytes In Use"
       append_dimensions:
         InstanceId: "${aws:InstanceId}"
     logs:
