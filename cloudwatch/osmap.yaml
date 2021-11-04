@@ -73,9 +73,8 @@ Windows:
         Memory:
           metrics_collection_interval: 60
           measurement:
-            - "% Committed Bytes In Use"
-            - Name: Available MBytes
-              Unit: Megabytes
+            - Name: "% Committed Bytes In Use"
+              Unit: Percent
       append_dimensions:
         InstanceId: "${aws:InstanceId}"
     logs:
