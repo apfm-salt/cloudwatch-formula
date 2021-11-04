@@ -74,6 +74,8 @@ Windows:
           metrics_collection_interval: 60
           measurement:
             - "% Committed Bytes In Use"
+            - Name: Available MBytes
+              Unit: Megabytes
       append_dimensions:
         InstanceId: "${aws:InstanceId}"
     logs:
