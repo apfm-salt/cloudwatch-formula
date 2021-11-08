@@ -33,7 +33,7 @@ Linux:
         mem:
           resources: ["*"]
           measurement:
-            - "used_percent"
+            - "mem_used_percent"
       append_dimensions:
         InstanceId: "${aws:InstanceId}"
     logs:
