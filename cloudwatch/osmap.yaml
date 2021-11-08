@@ -1,7 +1,7 @@
 # https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Agent-Configuration-File-Details.html
 
 Linux:
-  config_file: /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json
+  config_file: '/opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json'
   config:
     metrics:
       metrics_collected:
