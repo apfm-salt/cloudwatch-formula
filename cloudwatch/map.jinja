@@ -6,7 +6,7 @@
 {% import_yaml 'cloudwatch/osmap.yaml' as osmap %}
 
 {# merge the osfamilymap #}
-{% set osfamilymap = salt['grains.filter_by'](osfamilymap, grain='os_family') or {} %}
+{% set osfamilymap = salt['grains.filter_by'](osfamilymap, grain='os_family') or {'pkg_ext': 'deb'} %}
 {% do salt['defaults.merge'](defaults['cloudwatch'], osfamilymap) %}
 
 {# merge the osmap #}
@@ -14,6 +14,9 @@
 {% do salt['defaults.merge'](defaults['cloudwatch'], osmap) %}
 
 {% set cloudwatch_settings = salt['pillar.get']('cloudwatch', defaults['cloudwatch'], merge=True) %}
+
+{% set base_url = cloudwatch_settings.base_url %}
+{% set pkgname = cloudwatch_settings.package_name %}
 
 {% if grains.os == 'Amazon' %}
     {% set os = 'amazon_linux' %}
@@ -29,9 +32,4 @@
 
 {# Construct our agent_url #}
 {# ref: https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os }}/{{ arch }}/latest/amazon-cloudwatch-agent.{{ pkg_ext }} #}
-{% set pkg_path = [cloudwatch_settings.base_url] %}
-{% do pkg_path.append(os.lower()) %}
-{% do pkg_path.append(arch.lower()) %}
-{% do pkg_path.append('latest') %}
-{% do pkg_path.append('amazon-cloudwatch-agent.' ~ cloudwatch_settings.pkg_ext) %}
-{% do cloudwatch_settings.update({'package_url': pkg_path|join('/')}) %}
+{% do cloudwatch_settings.update({'package_url': '{{ base_url }}/{{ os }}/{{ arch }}/latest/{{ pkgname }}.{{ pkg_ext }}'}) %}
