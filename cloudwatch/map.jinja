@@ -17,6 +17,8 @@
 
 {% set base_url = cloudwatch_settings.base_url %}
 {% set pkgname = cloudwatch_settings.package_name %}
+{% set os = None %}
+{% set arch = None %}
 
 {% if grains.os == 'Amazon' %}
     {% set os = 'amazon_linux' %}
@@ -31,5 +33,4 @@
 {% endif %}
 
 {# Construct our agent_url #}
-{# ref: https://s3.amazonaws.com/amazoncloudwatch-agent/{{ os }}/{{ arch }}/latest/amazon-cloudwatch-agent.{{ pkg_ext }} #}
 {% do cloudwatch_settings.update({'package_url': '{{ base_url }}/{{ os }}/{{ arch }}/latest/{{ pkgname }}.{{ pkg_ext }}'}) %}
