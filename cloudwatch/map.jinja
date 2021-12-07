@@ -29,4 +29,4 @@
     {% set arch = 'arm64' %}
 {% endif %}
 
-{% set _dummy = cloudwatch_settings.update({'package_url': '{{ base_url }}/{{ os }}/{{ arch }}/latest/{{ pkgname }}.{{ pkg_ext }}'}) %}
+{% set _dummy = cloudwatch_settings.update({'package_url': base_url ~ '/' ~ os ~ '/' ~ arch ~ '/latest/' ~ pkgname ~ '.' ~ pkg_ext}) %}
