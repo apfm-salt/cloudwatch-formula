@@ -3,7 +3,6 @@
 {{ cloudwatch_settings.package_name }}:
   pkg.installed:
 {%- if grains['os'] == 'Windows' %}
-{# install from the formula winrepo definition #}
     - name: {{ cloudwatch_settings.package_name }}
 {%- else %}
     - sources:
