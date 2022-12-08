@@ -20,11 +20,24 @@ Linux:
             - tcp_syn_sent
             - tcp_close
           metrics_collection_interval: 60
+        net:
+          measurement:
+            - bytes_sent
+            - bytes_recv
+            - err_in
+            - err_out
+          metrics_collection_interval: 60
         disk:
           measurement:
+            - free
+            - used
             - used_percent
-          resources: ["*"]
           drop_device: true
+          ignore_file_system_types:
+            - sysfs
+            - devtmpfs
+            - tmpfs
+            - squashfs
         processes:
           measurement:
             - running
@@ -33,7 +46,10 @@ Linux:
         mem:
           resources: ["*"]
           measurement:
-            - "mem_used_percent"
+            - used_percent
+            - free
+            - cached
+            - buffered
       append_dimensions:
         InstanceId: "${aws:InstanceId}"
     logs:
